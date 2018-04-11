@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import NavigationMenu from '../NavigationMenu';
 
 const HEADER_NAME = 'NBP User Interface'
 
-const Header = () => (
-  <AppBar
-    title={HEADER_NAME}
-  />
-);
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
+  }
 
-export default Header;
+  handleToggle = () => this.setState({open: !this.state.open})
+
+  handleClose = () => this.setState({open: false})
+
+  render() {
+    return (
+      <div>
+      <AppBar
+        title={HEADER_NAME}
+        onLeftIconButtonClick={this.handleToggle}
+      />
+      <Drawer
+        docked={false}
+        open={this.state.open}>
+        <NavigationMenu handleClose={this.handleClose}/>
+      </Drawer>
+      </div>
+    )
+  }
+}
+
+export default Header
