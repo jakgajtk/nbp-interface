@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import Header from './components/Header'
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,7 +10,11 @@ import ReactDOM from 'react-dom'
 
 class App extends Component {
   render () {
-    return <div>NBP User Interface</div>
+    return (
+      <MuiThemeProvider>
+        <Header />
+      </MuiThemeProvider>
+    )
   }
 }
 
