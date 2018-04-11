@@ -24,7 +24,8 @@ class Header extends Component {
       />
       <Drawer
         docked={false}
-        open={this.state.open}>
+        open={this.state.open}
+        onRequestChange={(open) => this.setState({open})}>
         <NavigationMenu handleClose={this.handleClose}/>
       </Drawer>
       </div>

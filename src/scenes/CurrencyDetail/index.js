@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class CurrencyDetail extends Component {
   render () {
@@ -9,4 +10,4 @@ class CurrencyDetail extends Component {
 }
 
 
-export default CurrencyDetail
+export default connect()(CurrencyDetail)

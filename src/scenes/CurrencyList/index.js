@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import api from '../../services/Api'
 
 class CurrencyList extends Component {
+  componentDidMount() {
+    this.props.dispatch(api.getPrimaryCurrencyList)
+      .then(data => {
+        console.log(data)
+      })
+  }
+
   render () {
     return (
       <div>currency list view</div>
@@ -9,4 +18,4 @@ class CurrencyList extends Component {
 }
 
 
-export default CurrencyList
+export default connect()(CurrencyList)

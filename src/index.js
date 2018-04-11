@@ -1,17 +1,34 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
-import ReactDOM from 'react-dom'
+import navigation from './navigation'
+import { Provider } from 'react-redux'
+import store from './store'
 
 class App extends Component {
-  render () {
+  getRouteItem = item => {
+    const path = `/${item.name}`
     return (
-      <Router>
-        <MuiThemeProvider>
-          <Header />
-        </MuiThemeProvider>
-      </Router>
+      <Route path={path} key={item.name} component={item.component} />
+    )
+  }
+
+  render () {
+    const routes = navigation.map(item => this.getRouteItem(item))
+    return (
+      <Provider store={store}>
+        <Router>
+          <Switch>
+          <MuiThemeProvider>
+            <div>
+              <Header />
+              {routes}
+            </div>
+          </MuiThemeProvider>
+          </Switch>
+        </Router>
+      </Provider>
     )
   }
 }
