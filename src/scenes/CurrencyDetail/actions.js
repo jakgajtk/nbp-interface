@@ -1,17 +1,9 @@
-const REMOVE_FAVOURITE = 'FAVOURITE/REMOVE'
-const ADD_FAVOURITE = 'FAVOURITE/ADD'
+const ADD = 'CURRENCY/ADD'
 
 export const actions = {
-  REMOVE_FAVOURITE,
-  ADD_FAVOURITE
+  ADD
 }
-
 export const add = data => ({
-  type: ADD_FAVOURITE,
-  data
-})
-
-export const remove = data => ({
-  type: REMOVE_FAVOURITE,
+  type: ADD,
   data
 })

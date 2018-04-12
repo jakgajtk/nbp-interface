@@ -5,15 +5,20 @@ import About from '../scenes/About'
 
 const navigation = [{
   name: 'About',
+  path: '',
   component: About
 }, {
-  name: 'CurrencyDetail',
-  component: CurrencyDetail
+  name: 'Currency Details',
+  path: 'currency-detail/:table/:currency',
+  component: CurrencyDetail,
+  hidden: true
 }, {
-  name: 'CurrencyList',
+  name: 'Currency List',
+  path: 'currency-list',
   component: CurrencyList
 }, {
   name: 'Favourite',
+  path: 'favourite',
   component: Favourite
 }]
 

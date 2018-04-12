@@ -1,13 +1,89 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import api from '../../services/Api'
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+import { add } from './actions'
+import { addFavourite, removeFavourite } from '../Favourite/actions'
+import getCurrencyDetail from './selectors'
+import getFavouriteList from '../Favourite/selectors'
 
 class CurrencyDetail extends Component {
+  componentDidMount () {
+    const {
+      dispatch,
+      match: {params: {currency, table}}
+    } = this.props
+    const apiParams = {currency, table}
+    dispatch(api.getCurrencyListDetails(apiParams))
+      .then(data => {
+        dispatch(add(data.body))
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  onAddFavouriteButtonClick = () => {
+    const { currency, dispatch } = this.props
+    dispatch(addFavourite(currency))
+  }
+
+  onRemoveFavouriteButtonClick = () => {
+    const { currency, dispatch } = this.props
+    dispatch(removeFavourite(currency))
+  }
+
   render () {
+    const {currency: detail, favourite} = this.props
+    let result
+    if (detail) {
+      const isFavourite = !!favourite[detail.code]
+      const favouriteResult = isFavourite ? (<div>
+          <p>
+            Already in your favourite list.
+          </p>
+          <FlatButton
+            label="Remove from favourite"
+            onClick={this.onRemoveFavouriteButtonClick}
+            primary={true}
+          />
+        </div>) : (<FlatButton
+        label="Add to favourite"
+        onClick={this.onAddFavouriteButtonClick}
+        primary={true}
+      />)
+
+      result = (<div>
+          <CardHeader
+            title={detail.currency}
+            subtitle={detail.code}
+          />
+          <CardText>
+            <p>
+              Effective date: {detail.rates[0].effectiveDate}
+            </p>
+            <p>
+              Number: {detail.rates[0].no}
+            </p>
+            <p>
+              Rate: {detail.rates[0].mid}
+            </p>
+          </CardText>
+          <CardActions>
+            {favouriteResult}
+          </CardActions></div>
+      )
+    }
     return (
-      <div>detail view</div>
+      <Card>
+        {result}
+      </Card>
     )
   }
 }
 
-
-export default connect()(CurrencyDetail)
+export default connect(state => ({
+  currency: getCurrencyDetail(state),
+  favourite: getFavouriteList(state)
+}))(CurrencyDetail)

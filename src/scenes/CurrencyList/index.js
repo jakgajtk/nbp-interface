@@ -6,16 +6,32 @@ import { List, ListItem } from 'material-ui/List'
 import getCurrencyList from './selectors'
 import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom'
 
+const PRIMARY_TABLE = 'A'
+const SECONDARY_TABLE = 'B'
 const style = {
   float: 'right',
-  'line-height': '30px'
+  'lineHeight': '30px'
 }
+
 class CurrencyList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {table: PRIMARY_TABLE}
+  }
+
   componentDidMount() {
+    if (!this.props.currencyList.length) {
+      this.getPrimaryList()
+    }
+  }
+
+  getPrimaryList = () => {
     const { dispatch } = this.props
     dispatch(api.getPrimaryCurrencyList())
       .then(data => {
+        this.setState({table: PRIMARY_TABLE})
         dispatch(refresh(data.body[0].rates))
       })
       .catch(error => {
@@ -23,12 +39,28 @@ class CurrencyList extends Component {
       })
   }
 
+  getSecondaryList = () => {
+    const { dispatch } = this.props
+    dispatch(api.getSecondaryCurrencyList())
+      .then(data => {
+        this.setState({table: SECONDARY_TABLE})
+        dispatch(refresh(data.body[0].rates))
+      })
+      .catch(error => {
+        console.log('Error while fetching data: ', error)
+      })
+  }
+
   getListItem = item => {
-    return <ListItem
-        key={item.code}
-        primaryText={item.currency}
-        secondaryText={item.mid}
-      />
+    const path = `currency-detail/${this.state.table}/${item.code}`
+    return (
+      <Link to={path} style={{ textDecoration: 'none' }} key={item.code}>
+        <ListItem
+          primaryText={item.currency}
+          secondaryText={item.mid}
+        />
+      </Link>
+    )
   }
 
   render () {
@@ -36,10 +68,10 @@ class CurrencyList extends Component {
     return (
       <div>
         <List>
-          <Subheader>Currency Ratest List
+          <Subheader>Currency Rates List
             <span style={style}>
-              <RaisedButton label="Primary Currency Rates" primary={true} />
-              <RaisedButton label="Secondary Currency Rates" secondary={true} />
+              <RaisedButton label="Primary Currency Rates" primary={true} onClick={this.getPrimaryList} />
+              <RaisedButton label="Secondary Currency Rates" secondary={true} onClick={this.getSecondaryList}/>
             </span>
           </Subheader>
           {result}

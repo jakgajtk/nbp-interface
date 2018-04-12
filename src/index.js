@@ -8,7 +8,10 @@ import store from './store'
 
 class App extends Component {
   getRouteItem = item => {
-    const path = `/${item.name}`
+    if (!item.path) {
+      return <Route exact path='/' key={item.name} component={item.component} />
+    }
+    const path = `/${item.path}`
     return (
       <Route path={path} key={item.name} component={item.component} />
     )

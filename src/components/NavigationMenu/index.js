@@ -6,9 +6,12 @@ import navigation from '../../navigation'
 
 class NavigationMenu extends Component {
   getNavigationItem = item => {
-    const path = `/${item.name}`
+    if (item.hidden) {
+      return
+    }
+    const path = `/${item.path}`
     return (
-      <Link to={path} key={item.name}>
+      <Link to={path} style={{ textDecoration: 'none' }} key={item.name}>
       <MenuItem
         onClick={this.props.handleClose}
         primaryText={item.name}>

@@ -1,26 +1,15 @@
-import { combineReducers } from 'redux'
 import { createReducer } from 'redux-create-reducer'
 import { actions } from './actions'
 
 const initialState = {}
 
-const favourite = createReducer(initialState, {
-  [actions.ADD_FAVOURITE](state, action) {
-    const { id } = action.data
+const reducer = createReducer(initialState, {
+  [actions.ADD](state, action) {
     return {
       ...state,
-      [id]: {
-        ...action.data,
-      },
+      currency: action.data
     }
-  },
-  [actions.REMOVE_FAVOURITE](state, action) {
-    const { id } = action.data
-    delete state[id]
-    return {
-      ...state
-    }
-  },
+  }
 })
 
-export default favourite
+export default reducer
