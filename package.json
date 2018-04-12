@@ -47,6 +47,7 @@
     "redux": "^3.7.2",
     "redux-bees": "^0.1.7",
     "redux-create-reducer": "^1.1.1",
-    "redux-localstorage": "^0.4.1"
+    "redux-localstorage": "^0.4.1",
+    "redux-logger": "^3.0.6"
   }
 }

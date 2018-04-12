@@ -1,21 +1,17 @@
-import { combineReducers } from 'redux'
-import { createReducer } from 'redux-create-reducer'
-import { actions } from './actions'
+const REMOVE_FAVOURITE = 'FAVOURITE/REMOVE'
+const ADD_FAVOURITE = 'FAVOURITE/ADD'
 
-const initialState = {}
+export const actions = {
+  REMOVE_FAVOURITE,
+  ADD_FAVOURITE
+}
 
-const byId = createReducer(initialState, {
-  [actions.ADD_COMMENT](state, action) {
-    const { id } = action.comment
-    return {
-      ...state,
-      [id]: {
-        ...action.comment,
-      },
-    }
-  },
+export const add = data => ({
+  type: ADD_FAVOURITE,
+  data
 })
 
-export default combineReducers({
-  byId,
+export const remove = data => ({
+  type: REMOVE_FAVOURITE,
+  data
 })
