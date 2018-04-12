@@ -1,5 +1,6 @@
 import { createReducer } from 'redux-create-reducer'
 import { actions } from './actions'
+import _ from 'lodash'
 
 const initialState = {}
 
@@ -15,11 +16,9 @@ const reducer = createReducer(initialState, {
   },
   [actions.REMOVE_FAVOURITE](state, action) {
     const { code } = action.data
-    delete state[code]
-    const favourites = {}
+    const favourites = _.omit(state, [code])
     return {
-      ...state,
-      favourites
+      ...favourites
     }
   }
 })
