@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "muiPrepared": true,
+        "padding": "0px 0px 8px 0px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "color": "rgba(0, 0, 0, 0.54)",
+          "fontSize": 14,
+          "fontWeight": 500,
+          "lineHeight": "48px",
+          "muiPrepared": true,
+          "paddingLeft": 16,
+          "width": "100%",
+        }
+      }
+    >
+      Favourite Currencies list
+    </div>
+  </div>
+</div>
+`;

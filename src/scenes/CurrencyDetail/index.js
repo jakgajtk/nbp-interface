@@ -8,6 +8,7 @@ import { addFavourite, removeFavourite } from '../Favourite/actions'
 import getCurrencyDetail from './selectors'
 import getFavouriteList from '../Favourite/selectors'
 import _ from 'lodash'
+import PropTypes from 'prop-types'
 
 class CurrencyDetail extends Component {
   componentDidMount () {
@@ -26,12 +27,12 @@ class CurrencyDetail extends Component {
   }
 
   onAddFavouriteButtonClick = () => {
-    const { currency, dispatch } = this.props
+    const {currency, dispatch} = this.props
     dispatch(addFavourite(currency))
   }
 
   onRemoveFavouriteButtonClick = () => {
-    const { currency, dispatch } = this.props
+    const {currency, dispatch} = this.props
     dispatch(removeFavourite(currency))
   }
 
@@ -42,7 +43,7 @@ class CurrencyDetail extends Component {
       const isFavourite = _.find(favouriteList, item => item.code === detail.code)
       const favouriteResult = isFavourite ? (<div>
         <p>
-            Already in your favourite list.
+          Already in your favourite list.
         </p>
         <FlatButton
           label='Remove from favourite'
@@ -56,24 +57,24 @@ class CurrencyDetail extends Component {
       />)
 
       result = (<div>
-        <CardHeader
-          title={detail.currency}
-          subtitle={detail.code}
-        />
-        <CardText>
-          <p>
+          <CardHeader
+            title={detail.currency}
+            subtitle={detail.code}
+          />
+          <CardText>
+            <p>
               Effective date: {detail.rates[0].effectiveDate}
-          </p>
-          <p>
+            </p>
+            <p>
               Number: {detail.rates[0].no}
-          </p>
-          <p>
+            </p>
+            <p>
               Rate: {detail.rates[0].mid}
-          </p>
-        </CardText>
-        <CardActions>
-          {favouriteResult}
-        </CardActions></div>
+            </p>
+          </CardText>
+          <CardActions>
+            {favouriteResult}
+          </CardActions></div>
       )
     }
     return (
@@ -82,6 +83,16 @@ class CurrencyDetail extends Component {
       </Card>
     )
   }
+}
+
+// From react router Link
+CurrencyDetail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      currency: PropTypes.string.isRequired,
+      table: PropTypes.string.isRequired
+    })
+  })
 }
 
 export default connect(state => ({
