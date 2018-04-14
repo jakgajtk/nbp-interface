@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "test": "jest",
+    "test": "standard && jest",
     "format": "standard --fix"
   },
   "jest": {
