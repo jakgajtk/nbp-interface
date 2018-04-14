@@ -57,24 +57,24 @@ class CurrencyDetail extends Component {
       />)
 
       result = (<div>
-          <CardHeader
-            title={detail.currency}
-            subtitle={detail.code}
-          />
-          <CardText>
-            <p>
-              Effective date: {detail.rates[0].effectiveDate}
-            </p>
-            <p>
-              Number: {detail.rates[0].no}
-            </p>
-            <p>
-              Rate: {detail.rates[0].mid}
-            </p>
-          </CardText>
-          <CardActions>
-            {favouriteResult}
-          </CardActions></div>
+        <CardHeader
+          title={detail.currency}
+          subtitle={detail.code}
+        />
+        <CardText>
+          <p>
+            Effective date: {detail.rates[0].effectiveDate}
+          </p>
+          <p>
+            Number: {detail.rates[0].no}
+          </p>
+          <p>
+            Rate: {detail.rates[0].mid}
+          </p>
+        </CardText>
+        <CardActions>
+          {favouriteResult}
+        </CardActions></div>
       )
     }
     return (
