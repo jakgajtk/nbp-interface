@@ -1,3 +1,3 @@
-export default function getFavouriteList(state) {
+export default function getFavouriteList (state) {
   return state.favourite
 }

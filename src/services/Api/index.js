@@ -1,6 +1,6 @@
 import {
   buildApi,
-  get,
+  get
 } from 'redux-bees'
 
 const apiUrl = 'http://api.nbp.pl/api/exchangerates/'
@@ -24,5 +24,5 @@ const apiEndpoints = {
 }
 
 export default {
-  ...buildApi(apiEndpoints, config),
+  ...buildApi(apiEndpoints, config)
 }

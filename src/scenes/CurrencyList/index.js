@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import api from '../../services/Api'
 import { refresh } from './actions'
-import { List, ListItem } from 'material-ui/List'
+import { List } from 'material-ui/List'
 import getCurrencyList from './selectors'
-import Subheader from 'material-ui/Subheader';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router-dom'
+import Subheader from 'material-ui/Subheader'
+import RaisedButton from 'material-ui/RaisedButton'
+import CurrencyListItem from '../../components/CurrencyListItem'
 
 const PRIMARY_TABLE = 'A'
 const SECONDARY_TABLE = 'B'
@@ -16,12 +16,12 @@ const style = {
 }
 
 class CurrencyList extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {table: PRIMARY_TABLE}
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (!this.props.currencyList.length) {
       this.getPrimaryList()
     }
@@ -51,27 +51,16 @@ class CurrencyList extends Component {
       })
   }
 
-  getListItem = item => {
-    const path = `currency-detail/${this.state.table}/${item.code}`
-    return (
-      <Link to={path} style={{ textDecoration: 'none' }} key={item.code}>
-        <ListItem
-          primaryText={item.currency}
-          secondaryText={item.mid}
-        />
-      </Link>
-    )
-  }
-
   render () {
-    const result = this.props.currencyList.map(item => this.getListItem(item))
+    const result = this.props.currencyList.map(item => <CurrencyListItem item={item} table={this.state.table} key={item.code} />)
     return (
       <div>
         <List>
-          <Subheader>Currency Rates List
+          <Subheader>
+            <span>Currency Rates List</span>
             <span style={style}>
-              <RaisedButton label="Primary Currency Rates" primary={true} onClick={this.getPrimaryList} />
-              <RaisedButton label="Secondary Currency Rates" secondary={true} onClick={this.getSecondaryList}/>
+              <RaisedButton label='Primary Currency Rates' primary onClick={this.getPrimaryList} />
+              <RaisedButton label='Secondary Currency Rates' secondary onClick={this.getSecondaryList} />
             </span>
           </Subheader>
           {result}
@@ -82,5 +71,5 @@ class CurrencyList extends Component {
 }
 
 export default connect(state => ({
-  currencyList: getCurrencyList(state),
+  currencyList: getCurrencyList(state)
 }))(CurrencyList)

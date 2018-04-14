@@ -23,12 +23,12 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
-          <MuiThemeProvider>
-            <div>
-              <Header />
-              {routes}
-            </div>
-          </MuiThemeProvider>
+            <MuiThemeProvider>
+              <div>
+                <Header />
+                {routes}
+              </div>
+            </MuiThemeProvider>
           </Switch>
         </Router>
       </Provider>

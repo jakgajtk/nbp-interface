@@ -4,7 +4,7 @@ import { actions } from './actions'
 const initialState = {}
 
 const reducer = createReducer(initialState, {
-  [actions.ADD](state, action) {
+  [actions.ADD] (state, action) {
     return {
       ...state,
       currency: action.data

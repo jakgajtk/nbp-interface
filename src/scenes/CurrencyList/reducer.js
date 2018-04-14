@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const currencyReducer = createReducer(initialState, {
-  [actions.REFRESH_LIST](state, action) {
+  [actions.REFRESH_LIST] (state, action) {
     return {
       ...state,
       list: action.data

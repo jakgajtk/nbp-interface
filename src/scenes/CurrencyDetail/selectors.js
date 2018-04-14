@@ -1,3 +1,3 @@
-export default function getCurrencyDetail(state) {
+export default function getCurrencyDetail (state) {
   return state.currencyDetail.currency
 }

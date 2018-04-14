@@ -7,6 +7,7 @@ import { add } from './actions'
 import { addFavourite, removeFavourite } from '../Favourite/actions'
 import getCurrencyDetail from './selectors'
 import getFavouriteList from '../Favourite/selectors'
+import _ from 'lodash'
 
 class CurrencyDetail extends Component {
   componentDidMount () {
@@ -35,44 +36,44 @@ class CurrencyDetail extends Component {
   }
 
   render () {
-    const {currency: detail, favourite} = this.props
+    const {currency: detail, favourite: {list: favouriteList}} = this.props
     let result
     if (detail) {
-      const isFavourite = !!favourite[detail.code]
+      const isFavourite = _.find(favouriteList, item => item.code === detail.code)
       const favouriteResult = isFavourite ? (<div>
-          <p>
+        <p>
             Already in your favourite list.
-          </p>
-          <FlatButton
-            label="Remove from favourite"
-            onClick={this.onRemoveFavouriteButtonClick}
-            primary={true}
-          />
-        </div>) : (<FlatButton
-        label="Add to favourite"
+        </p>
+        <FlatButton
+          label='Remove from favourite'
+          onClick={this.onRemoveFavouriteButtonClick}
+          primary
+        />
+      </div>) : (<FlatButton
+        label='Add to favourite'
         onClick={this.onAddFavouriteButtonClick}
-        primary={true}
+        primary
       />)
 
       result = (<div>
-          <CardHeader
-            title={detail.currency}
-            subtitle={detail.code}
-          />
-          <CardText>
-            <p>
+        <CardHeader
+          title={detail.currency}
+          subtitle={detail.code}
+        />
+        <CardText>
+          <p>
               Effective date: {detail.rates[0].effectiveDate}
-            </p>
-            <p>
+          </p>
+          <p>
               Number: {detail.rates[0].no}
-            </p>
-            <p>
+          </p>
+          <p>
               Rate: {detail.rates[0].mid}
-            </p>
-          </CardText>
-          <CardActions>
-            {favouriteResult}
-          </CardActions></div>
+          </p>
+        </CardText>
+        <CardActions>
+          {favouriteResult}
+        </CardActions></div>
       )
     }
     return (

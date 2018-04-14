@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "standard",
@@ -27,6 +30,7 @@
   "homepage": "https://github.com/jakgajtk/nbp-interface#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import NavigationMenu from '../NavigationMenu';
+import React, { Component } from 'react'
+import AppBar from 'material-ui/AppBar'
+import Drawer from 'material-ui/Drawer'
+import NavigationMenu from '../NavigationMenu'
 
 const HEADER_NAME = 'NBP User Interface'
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {open: false}
   }
 
@@ -15,19 +15,19 @@ class Header extends Component {
 
   handleClose = () => this.setState({open: false})
 
-  render() {
+  render () {
     return (
       <div>
-      <AppBar
-        title={HEADER_NAME}
-        onLeftIconButtonClick={this.handleToggle}
-      />
-      <Drawer
-        docked={false}
-        open={this.state.open}
-        onRequestChange={(open) => this.setState({open})}>
-        <NavigationMenu handleClose={this.handleClose}/>
-      </Drawer>
+        <AppBar
+          title={HEADER_NAME}
+          onLeftIconButtonClick={this.handleToggle}
+        />
+        <Drawer
+          docked={false}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}>
+          <NavigationMenu handleClose={this.handleClose} />
+        </Drawer>
       </div>
     )
   }

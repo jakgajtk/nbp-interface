@@ -12,15 +12,14 @@ class NavigationMenu extends Component {
     const path = `/${item.path}`
     return (
       <Link to={path} style={{ textDecoration: 'none' }} key={item.name}>
-      <MenuItem
-        onClick={this.props.handleClose}
-        primaryText={item.name}>
-      </MenuItem>
+        <MenuItem
+          onClick={this.props.handleClose}
+          primaryText={item.name} />
       </Link>
-      )
+    )
   }
 
-  render() {
+  render () {
     const navigationItems = navigation.map(value => this.getNavigationItem(value))
     return (
       <div>{navigationItems}</div>
@@ -29,7 +28,7 @@ class NavigationMenu extends Component {
 }
 
 NavigationMenu.propTypes = {
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired
 }
 
 export default NavigationMenu
