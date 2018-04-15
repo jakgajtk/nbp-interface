@@ -19,8 +19,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: path.join('/dist'),
-    publicPath: '/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
   plugins: [
@@ -30,5 +29,6 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     historyApiFallback: true
-  }
+  },
+  devtool: 'source-map'
 }
